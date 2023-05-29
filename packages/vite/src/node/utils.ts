@@ -137,7 +137,7 @@ export function isOptimizable(
   )
 }
 
-export const bareImportRE = /^[\w@](?!.*:\/\/)/
+export const bareImportRE = /^(?![a-zA-Z]:)[\w@](?!.*:\/\/)/
 export const deepImportRE = /^([^@][^/]*)\/|^(@[^/]+\/[^/]+)\//
 
 // TODO: use import()
@@ -169,7 +169,7 @@ export function createDebugger(
 
   if (enabled) {
     return (...args: [string, ...any[]]) => {
-      if (!filter || args.some((a) => a?.includes(filter))) {
+      if (!filter || args.some((a) => a?.includes?.(filter))) {
         log(...args)
       }
     }
